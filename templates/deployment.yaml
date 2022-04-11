@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alfred-github-app
+spec:
+  selector:
+    matchLabels:
+      app: alfred-github-app
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: alfred-github-app
+    spec:
+      containers:
+      - name: alfred-github-app
+        image: linsay1999/github-app:latest
+        ports:
+        - containerPort: 80

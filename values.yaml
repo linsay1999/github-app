@@ -1,0 +1,63 @@
+application:
+  name: alfred-github-app
+
+labels:
+  app: alfred-github-app
+
+namespace: alfred 
+
+image:
+  repository: linsay1999/github-app
+  tag: latest
+  #pullPolicy: IfNotPresent
+   
+replicaCount: 4
+
+#updateStrategy:
+#  type: RollingUpdate
+#  rollingUpdate: {}
+
+#resources:
+  ## Example:
+  ## limits:::
+  ##    cpu: 100m
+  ##    memory: 128Mi
+ # limits: {}
+  ## Examples:
+  ## requests:
+  ##    cpu: 100m
+  ##    memory: 128Mi
+
+livenessProbe:
+  enabled: false
+  initialDelaySeconds: 30
+  timeoutSeconds: 5
+  periodSeconds: 10
+  failureThreshold: 6
+  successThreshold: 1
+
+readinessProbe:
+  enabled: false
+  initialDelaySeconds: 5
+  timeoutSeconds: 3
+  periodSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+
+autoscaling:
+  enabled: false
+  minReplicas: ""
+  maxReplicas: ""
+  targetCPU: ""
+  targetMemory: ""
+ 
+service:
+  name: alfred-github-svc
+  type: LoadBalancer
+  #protocol: "TCP"
+  ports: 
+    port: 3240
+    nodePorts: 30020
+    targetPort: 80
+    containerport: 80
+
