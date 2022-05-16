@@ -27,18 +27,18 @@ pipeline {
             }
         }
 
-        stage('docker run -i --name alfred-jenkins -P login001') {
+        stage('Contenarize the application') {
             steps {
                 sh '''
-                lsblk
+                docker run -i --name alfred-jenkins -P login001
                 '''
             }
         }
 
-        stage('Hello5') {
+        stage('Checking Containers') {
             steps {
                 sh '''
-                pwd
+                docker ps
                 '''
             }
         }
