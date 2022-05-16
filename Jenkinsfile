@@ -2,31 +2,32 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello1') {
+        stage('Cleaning Environment') {
             steps {
                 sh '''
-                date
+                docker rm -f $(docker ps -aq)
+                
                 '''
             }
         }
 
-        stage('Hello2') {
+        stage('Building Image') {
             steps {
                 sh '''
-                cat /etc/passwd
+                docker build  -t  login001 .
                 '''
             }
         }
 
-        stage('Hello3') {
+        stage('Checking the images ') {
             steps {
                 sh '''
-                ls -l
+                docker images
                 '''
             }
         }
 
-        stage('Hello4') {
+        stage('docker run -i --name alfred-jenkins -P login001') {
             steps {
                 sh '''
                 lsblk
