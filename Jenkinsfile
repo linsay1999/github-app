@@ -5,7 +5,7 @@ pipeline {
         stage('Cleaning Environment') {
             steps {
                 sh '''
-                docker rm -f $(docker ps -aq)
+                docker rm -f $(docker ps -aq) || true
                 
                 '''
             }
